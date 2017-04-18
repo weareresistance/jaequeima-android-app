@@ -1,8 +1,5 @@
 package resistance.jaequeima;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +11,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -85,6 +85,7 @@ public class MainActivity extends Activity {
                     Date eventDate = dateFormat.parse("2017-05-05 21:00:00");
                     Date currentDate = new Date();
                     if (!currentDate.after(eventDate)) {
+
                         long diff = eventDate.getTime() - currentDate.getTime();
                         long days = diff / (24 * 60 * 60 * 1000);
                         diff -= days * (24 * 60 * 60 * 1000);
