@@ -1,5 +1,8 @@
 package resistance.jaequeima;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -8,12 +11,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
     private LinearLayout linearLayout2;
     private Handler handler;
     private Runnable runnable;
+    private Button btnDias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,17 @@ public class MainActivity extends Activity {
                 Uri uri = Uri.parse("http://www.resistance.pt");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+            }
+        });
+
+        btnDias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*FragmentManager fm = getFragmentManager();
+                fm.beginTransaction().replace(R.id.content_frame, new dias()).addToBackStack("tag").commit();*/
+                Intent i = new Intent(getApplicationContext(),DaysActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.left_right_in,R.anim.left_right_out);
             }
         });
     }
@@ -70,6 +83,8 @@ public class MainActivity extends Activity {
         txtTvSecond.setTypeface(type);
 
         logoResistance = (ImageButton) findViewById(R.id.imageButton);
+
+        btnDias = (Button) findViewById(R.id.button);
     }
 
 
@@ -85,7 +100,6 @@ public class MainActivity extends Activity {
                     Date eventDate = dateFormat.parse("2017-05-05 21:00:00");
                     Date currentDate = new Date();
                     if (!currentDate.after(eventDate)) {
-
                         long diff = eventDate.getTime() - currentDate.getTime();
                         long days = diff / (24 * 60 * 60 * 1000);
                         diff -= days * (24 * 60 * 60 * 1000);
