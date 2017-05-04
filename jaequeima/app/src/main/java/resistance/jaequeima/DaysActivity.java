@@ -194,7 +194,6 @@ public class DaysActivity extends AppCompatActivity {
             listViewsID[i].setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    System.out.println("oioioi");
                     return onTouchEvent(event);
                 }
             });
