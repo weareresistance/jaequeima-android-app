@@ -4,44 +4,27 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.ArrayMap;
-import android.util.Log;
+import android.text.format.DateFormat;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static resistance.jaequeima.R.id.listView1;
 import static resistance.jaequeima.R.id.tabHost;
 
 public class DaysActivity extends AppCompatActivity {
@@ -138,6 +121,23 @@ public class DaysActivity extends AppCompatActivity {
         List[] days = new List[] {day1, day2, day3, day4, day5, day6, day7, day8};
         ListView[] listViewsID = new ListView[] {(ListView)findViewById(R.id.listView1), (ListView)findViewById(R.id.listView2),(ListView)findViewById(R.id.listView3),(ListView)findViewById(R.id.listView4),(ListView)findViewById(R.id.listView5),(ListView)findViewById(R.id.listView6),(ListView)findViewById(R.id.listView7),(ListView)findViewById(R.id.listView8)};
 
+        String day = (String) DateFormat.format("dd", new Date());
+
+        if(day.equals("6"))
+            host.setCurrentTab(1);
+        else if(day.equals("7"))
+            host.setCurrentTab(2);
+        else if(day.equals("8"))
+            host.setCurrentTab(3);
+        else if(day.equals("9"))
+            host.setCurrentTab(4);
+        else if(day.equals("10"))
+            host.setCurrentTab(5);
+        else if(day.equals("11"))
+            host.setCurrentTab(6);
+        else if(day.equals("12"))
+            host.setCurrentTab(7);
+
         for (int i = 0; i < host.getTabWidget().getChildCount(); ++i)
         {
 
@@ -149,7 +149,12 @@ public class DaysActivity extends AppCompatActivity {
             }
 
             TextView tv = (TextView) host.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
-            tv.setShadowLayer(5,2,2,255);
+            //tv.setShadowLayer(5,2,2,255);
+
+            tv.setShadowLayer(5, 2, 2, android.R.color.holo_green_dark);
+
+            if (i == 5 || i == 6 || i == 7)
+                tv.setTextSize(12);
 
             Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Oswald_Bold.ttf");
             tv.setTypeface(tf,Typeface.BOLD);
@@ -162,9 +167,29 @@ public class DaysActivity extends AppCompatActivity {
 
                     Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Oswald_Bold.ttf");
                     textView.setTypeface(tf,Typeface.BOLD);
+
+                    System.out.println(textView.getText().toString());
+
+                    if ( textView.getText().toString().equals("JAMES ARTUR") ||
+                         textView.getText().toString().equals("DIOGO PIÇARRA") ||
+                         textView.getText().toString().equals("DAVID CARREIRA") ||
+                         textView.getText().toString().equals("QUIM BARREIROS") ||
+                         textView.getText().toString().equals("Piruka") ||
+                         textView.getText().toString().equals("RICHIE CAMPBELL") ||
+                         textView.getText().toString().equals("NICKY ROMERO") ||
+                         textView.getText().toString().equals("VIRGUL") ||
+                         textView.getText().toString().equals("Mishlawi") ||
+                         textView.getText().toString().equals("KAISER CHIEFS") ||
+                         textView.getText().toString().equals("Flying Cages") ||
+                         textView.getText().toString().equals("DJ Ride") ||
+                         textView.getText().toString().equals("KAISER CHIEFS") )
+                        textView.setTextSize(30);
+
+
                     return view;
                 }
             };
+
             listViewsID[i].setAdapter(arrayAdapter);
             listViewsID[i].setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -238,10 +263,11 @@ public class DaysActivity extends AppCompatActivity {
                         tvHour.setText(String.format("%02d", hours));
                         tvMinute.setText(String.format("%02d", minutes));
                         tvSecond.setText(String.format("%02d", seconds));
+
                     } else {
                         linearLayout2.setVisibility(View.GONE);
-                        tvEvent2.setVisibility(View.VISIBLE);
-                        tvEvent.setText("JÁ É QUEIMA?");
+                        tvEvent2.setVisibility(View.GONE);
+                        tvEvent.setText("JÁ É QUEIMA!");
                         tvEvent.setPadding(0,10,0,0);
 
                         handler.removeCallbacks(runnable);
@@ -255,14 +281,14 @@ public class DaysActivity extends AppCompatActivity {
     }
 
     public void listaArtistas(){
-        day1 = Arrays.asList("TFMUC","You Can't Win Charlie Brown","JAMES ARTUR","TMUC");
-        day2 = Arrays.asList("Orquestra Típica e Rancho","DIOGO PIÇARRA","DAVID CARREIRA","Estudantina Universitária de Coimbra");
-        day3 = Arrays.asList("Quantunna","Miguel Azevedo", "HI-FI","QUIM BARREIROS","FAN-Farra");
-        day4 = Arrays.asList("Mondeguinas","Piruka", "MUNDO SEGUNDO E SAM THE KID","Estudantina Feminina de Coimbra");
-        day5 = Arrays.asList("Phartuna","Mishlawi", "RICHIE CAMPBELL","Imperial TAFFUC");
-        day6 = Arrays.asList("Reyc Gi","DJ Kwan", "NICKY ROMERO","Coral Quecofónico do Cifrão");
-        day7 = Arrays.asList("Desconcertuna","VIRGUL", "DJ Ride","Orxestra Pitagórica");
-        day8 = Arrays.asList("As FANS","Flying Cages", "KAISER CHIEFS","Grupo de Cordas","Grupo de Fado");
+        day1 = Arrays.asList("TFMUC","You Can't Win Charlie Brown","JAMES ARTUR","TMUC",""," Estudante - 10€","Não Estudante - 15€");
+        day2 = Arrays.asList("Orquestra Típica e Rancho","DIOGO PIÇARRA","DAVID CARREIRA","Estudantina Universitária de Coimbra",""," Estudante - 8€","Não Estudante - 13€");
+        day3 = Arrays.asList("Quantunna","Miguel Azevedo", "HI-FI","QUIM BARREIROS","FAN-Farra",""," Estudante - 5€","Não Estudante - 8€");
+        day4 = Arrays.asList("Mondeguinas","Piruka", "MUNDO SEGUNDO & SAM THE KID","Estudantina Feminina de Coimbra",""," Estudante - 6€","Não Estudante - 9€");
+        day5 = Arrays.asList("Phartuna","Mishlawi", "RICHIE CAMPBELL","Imperial TAFFUC",""," Estudante - 8€","Não Estudante - 13€");
+        day6 = Arrays.asList("Reyc Gi","DJ Kwan", "NICKY ROMERO","Coral Quecofónico do Cifrão",""," Estudante - 9€","Não Estudante - 14€");
+        day7 = Arrays.asList("Desconcertuna","VIRGUL", "DJ Ride","Orxestra Pitagórica",""," Estudante - 7€","Não Estudante - 12€");
+        day8 = Arrays.asList("As FANS","Flying Cages", "KAISER CHIEFS","Grupo de Cordas","Grupo de Fado",""," Estudante - 10€","Não Estudante - 15€");
     }
 
     @Override
@@ -379,17 +405,17 @@ public class DaysActivity extends AppCompatActivity {
     public void switchTabs(boolean direction) {
         if (direction) // true = move left
         {
-            if (host.getCurrentTab() == 0)
-                host.setCurrentTab(host.getTabWidget().getTabCount() - 1);
-            else
-                host.setCurrentTab(host.getCurrentTab() - 1);
-        } else
-        // move right
-        {
             if (host.getCurrentTab() != (host.getTabWidget().getTabCount() - 1))
                 host.setCurrentTab(host.getCurrentTab() + 1);
             else
                 host.setCurrentTab(0);
+        } else
+        // move right
+        {
+            if (host.getCurrentTab() == 0)
+                host.setCurrentTab(host.getTabWidget().getTabCount() - 1);
+            else
+                host.setCurrentTab(host.getCurrentTab() - 1);
         }
     }
 }

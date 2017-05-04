@@ -1,8 +1,5 @@
 package resistance.jaequeima;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +12,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
                         tvSecond.setText(String.format("%02d", seconds));
                     } else {
                         linearLayout2.setVisibility(View.GONE);
-                        tvEvent.setText("JÁ É QUEIMA");
+                        tvEvent.setText("JÁ É QUEIMA!");
                         handler.removeCallbacks(runnable);
                     }
                 } catch (Exception e) {
